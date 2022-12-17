@@ -1,23 +1,13 @@
-import logo from './logo.svg';
+import "@fontsource/bodoni-moda"
+import "@fontsource/bodoni-moda/600.css";
+import "@fontsource/bodoni-moda/900.css";
+
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div class="font-size-h1 flex just-center align-center">
+      Hello World
     </div>
   );
 }

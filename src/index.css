@@ -1,6 +1,6 @@
 
 body {
-  font-family: "Bodoni Moda", serif;
+  font-family: "Cormorant Garamond", serif;
   background-color: #F3F2F1;
   color: #3e463e;
 }
@@ -12,7 +12,7 @@ body {
 
 
 .heavy-weight {
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .flex {

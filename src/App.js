@@ -1,7 +1,5 @@
-import "@fontsource/bodoni-moda"
-import "@fontsource/bodoni-moda/600.css";
-import "@fontsource/bodoni-moda/900.css";
-
+import "@fontsource/cormorant-garamond"
+import "@fontsource/cormorant-garamond/700.css"
 import './App.css';
 
 function App() {

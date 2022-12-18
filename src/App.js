@@ -1,12 +1,23 @@
 import "@fontsource/cormorant-garamond"
 import "@fontsource/cormorant-garamond/700.css"
 import './App.css';
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
-    <div class="font-size-h1 flex just-center align-center">
-      Hello World
+    <>
+    <div className="body-background">
     </div>
+    <Navbar />
+    <div className="page-title-blur pad-large col heavy-weight font-size-h1 flex">
+        <div>
+          Marry
+        </div>
+        <div>
+          Weddin'
+        </div>
+    </div>
+    </>
   );
 }
 

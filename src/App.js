@@ -9,7 +9,7 @@ function App() {
     <div className="body-background">
     </div>
     <Navbar />
-    <div className="page-title-blur pad-large col heavy-weight font-size-h1 flex">
+    <div className="page-title-blur margin-large col heavy-weight font-size-h1 flex">
         <div>
           Marry
         </div>

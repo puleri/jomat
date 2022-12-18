@@ -38,6 +38,10 @@ body {
   position: absolute;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .top-0 {
   top:0;
 }
@@ -85,6 +89,10 @@ body {
 
 .align-center {
   align-items: center;
+}
+
+.margin-large {
+  margin: 100px 200px;
 }
 
 .pad-large {

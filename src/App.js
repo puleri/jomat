@@ -1,22 +1,24 @@
 import "@fontsource/cormorant-garamond"
 import "@fontsource/cormorant-garamond/700.css"
 import './App.css';
+
+import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
+import LandingPage from "./components/LandingPage/LandingPage";
+import RSVP from "./components/RSVP/RSVP";
+import Gallery from "./components/Gallery/Gallery";
+import ThingsToDo from "./components/ThingsToDo/ThingsToDo";
+
 
 function App() {
   return (
     <>
-    <div className="body-background">
-    </div>
-    <Navbar />
-    <div className="page-title-blur margin-large col heavy-weight font-size-h1 flex">
-        <div>
-          Marry
-        </div>
-        <div>
-          Weddin'
-        </div>
-    </div>
+    <Routes>
+      <Route exact path='/' element={<LandingPage/>} />
+      <Route exact path='/rsvp' element={<RSVP />} />
+      <Route exact path='/gallery' element={<Gallery />} />
+      <Route exact path='/things-to-do' element={<ThingsToDo />} />
+    </Routes>
     </>
   );
 }

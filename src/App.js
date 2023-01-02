@@ -1,9 +1,18 @@
 import "@fontsource/cormorant-garamond"
 import "@fontsource/cormorant-garamond/700.css"
+
+import "@fontsource/raleway/600.css"
+import "@fontsource/raleway/300.css"
+import "@fontsource/raleway/200.css"
+
+
+
+
+
+
 import './App.css';
 
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
 import LandingPage from "./components/LandingPage/LandingPage";
 import RSVP from "./components/RSVP/RSVP";
 import Gallery from "./components/Gallery/Gallery";

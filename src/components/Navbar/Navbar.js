@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <div className="heavy-weight align-center pad-medium fixed top-0 bottom-0 left-0 flex col height-100 z-top">
        
-        <Link to='/' className="link text-center flex col z-top hover-grow">
+        <Link to='/' className="nav-icon link text-center flex col z-top hover-grow">
             <div className='font-small pad-bottom-tiny'>J</div>
             <div className={css.slash}>/</div>
             <div className={css.m}>M</div>

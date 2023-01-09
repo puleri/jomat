@@ -18,7 +18,7 @@ function LandingPage() {
       <>
       <Navbar className='z-top'/>
       <div className="heavy-weight nav-icon link text-center flex col z-top top-right-date">
-            <div className="ten">10</div>
+            <div className="ten">08</div>
             <div className="slash2">/</div>
             <div className="m2">12</div>
       </div>

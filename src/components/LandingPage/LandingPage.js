@@ -42,7 +42,7 @@ function LandingPage() {
               <div className="card-right">
                 <div className="small-caps">the &nbsp;invite</div>
                 <div className="grey-dash"></div>
-                <div className="font-size-p raleway light-weight">Join us on this awesome moment where we celebreate the marriage of Joëlle and Matthew <span className="together-in-the-woods">together in the woods</span> of the Pacific Northwest</div>
+                <div className="font-size-p raleway light-weight">You are invited to witness the forthcoming nuptials of Joëlle and Matthew. <br/><br/>Reception to follow, <span className="together-in-the-woods">together in the woods</span> of the Pacific Northwest.</div>
                 <Link className="link raleway rsvp" to="/rsvp">RSVP</Link>
               </div>
             </div>

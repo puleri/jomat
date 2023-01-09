@@ -7,6 +7,8 @@ import "@fontsource/raleway/200.css"
 
 
 
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 
 

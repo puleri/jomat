@@ -6,7 +6,6 @@
     font-size: 12px;
     padding-top: 3px;
 }
-
 .z-top {
     position: relative;
     z-index: 9;
@@ -39,6 +38,9 @@
 }
 
 .nav2 {
+    /* coming soon */
+    pointer-events: none;
+
     z-index: 9;
     position: relative;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -52,6 +54,8 @@
     margin-top: 70px;
     text-decoration: none;
     color: #254f3f;
+    color: #254f3f7c;  
+
   
 }
 .nav2::after {
@@ -62,9 +66,13 @@
     width: 78%;
     height: 2px;
     background-color: #163227;
+    background-color: #254f3f7c;
 }
 
 .nav3 {
+        /* coming soon */
+        pointer-events: none;
+
     z-index: 9;
     position: relative;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -78,7 +86,8 @@
     margin-left:-10px;
     text-decoration: none;
     color: #254f3f;
-  
+    color: #254f3f7c;  
+
 }
 .nav3::after {
     content: '';
@@ -88,9 +97,13 @@
     width: 80%;
     height: 2px;
     background-color: #163227;
+    background-color: #254f3f7c;
 }
 
 .navLoc {
+        /* coming soon */
+        pointer-events: none;
+
     position: relative;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 8px;
@@ -103,6 +116,7 @@
     margin-left:-10px;
     text-decoration: none;
     color: #254f3f;  
+
 }
 /* .navLoc::after {
     content: '';

@@ -1,5 +1,10 @@
 import Navbar from "../Navbar/Navbar";
 import { useState } from 'react'
+import mtns from '../../mtns.png'
+
+import firebase from '../../firebase'
+
+import 'firebase/firestore';
 
 
 function RSVP() {
@@ -7,11 +12,72 @@ function RSVP() {
   const [rsvp, setRsvp] = useState({
     name: '',
     response: '',
-    numberGuests: ''
+    numberGuests: '',
+    dietary: ''
   })
+
+  const [formOpen, setFormOpen] = useState(false)
+
+  const [notification, setNotification] = useState({
+    active: false,
+    error: false,
+    message: ''
+  })
+
+
+
+  const handleSendRSVP = () => {
+    // on error
+    if (!rsvp.name || rsvp.response || rsvp.numberGuests || rsvp.dietary) {
+        setNotification({
+            active: true,
+            error: true,
+            message: 'Fill out name before submitting'
+        })
+
+        setTimeout(() => {
+            setNotification({
+                active: false,
+                error: false,
+                message: ''
+            })
+          }, "4000")
+          return
+    }
+    const db = firebase.firestore();
+
+    // Add a new document in collection "rsvp-going" if guests selects yes
+    db.collection("rsvp-going").doc().set({
+        names: rsvp.name,
+        dietary: rsvp.active,
+        numberGuests: rsvp.numberGuests
+    })
+    .then(() => {
+        setFormOpen(false)
+        setNotification({
+            active: true,
+            error: false,
+            message: 'Market added!'
+        })
+        setTimeout(() => {
+            setNotification({
+                active: false,
+                message: ''
+            })
+          }, "4000")
+        console.log("Document successfully written!");
+    })
+    .catch((error) => {
+        console.error("Error writing document: ", error);
+    });
+}
+
+
   return (
     <>
+     <div className="overflow-hidden">
       <Navbar />
+        <img className="mtns-rsvp" src={mtns} />
       <div className="flex just-center nav-pull-margin">
 
         <div className="relative padding-medium col text-center flex">
@@ -32,7 +98,7 @@ function RSVP() {
               onChange={(e) => setRsvp({ ...rsvp, name: e.target.value })} /></label>
 
             <label
-              className="raleway font-size-h5"
+              className="raleway font-size-h5 joyfully"
             >Joyfully accepts
             <input
               className="raleway font-size-h5 radio-input"
@@ -63,7 +129,7 @@ function RSVP() {
             <input
               className="raleway font-size-h5 no-guests-input"
               name="guestName"
-              type="text"
+              type="number"
               value={rsvp.numberGuests}
               onChange={(e) => setRsvp({ ...rsvp, numberGuests: e.target.value })} /></label>
 
@@ -81,12 +147,12 @@ function RSVP() {
 
 
 
-              <button onClick={() => console.log(rsvp)} className="mail-svg flex text-center submit-btn">
+              <button onClick={() => console.log(rsvp)} className="mail-svg flex justify-center submit-btn">
               <h4 className="raleway font-size-h5 light-weight">
                 Send
                 </h4>
-                <svg  width="220" height="70" viewBox="0 0 119 49">
-                  <path fill="none" stroke-width=".7" class="path" d="M117.518 21.1259C114.659 21.1259 112.081 22.6453 109.603 24.0388C106.527 25.7693 102.874 26.6367 99.7756 28.3053C92.528 32.2078 82.1777 33.8369 74.0887 33.8369C65.1509 33.8369 58.6452 33.2231 52.1091 26.687C49.5227 24.1006 46.5999 20.7534 46.0478 16.8888C45.3544 12.0349 46.0055 8.36163 49.6081 5.11933C52.3831 2.62181 56.4425 1 60.0535 1C63.8828 1 67.2505 1.0541 70.2636 3.76583C71.382 4.77242 72.4517 6.0421 73.1471 7.35554C73.9128 8.8018 74.3883 11.4375 75.2656 12.5341C77.1166 14.8478 76.2072 19.9816 76.2072 22.9796C76.2072 24.9299 76.4444 26.7714 75.5598 28.5407C75.0246 29.6112 73.1602 31.731 73.0294 32.7777C72.9016 33.7997 70.9225 35.3025 70.3813 36.2497C69.2388 38.2489 66.9509 38.7869 65.6146 40.4573C63.8849 42.6194 58.8386 43.8392 56.3461 45.2239C54.4064 46.3015 52.0667 46.6457 49.9906 47.1071C38.962 49.5579 28.6562 49.052 18.7131 43.3702C15.6882 41.6417 12.4539 39.4435 9.88598 37.1324C8.06254 35.4913 5.98297 33.9055 4.82509 31.7184C4.17562 30.4916 2.43638 28.5407 1 28.5407" stroke="#333333" stroke-linecap="round"/>
+                <svg id="swoop" width="220" height="70" viewBox="0 0 119 49">
+                  <path fill="none" stroke-width="1" class="path" d="M117.518 21.1259C114.659 21.1259 112.081 22.6453 109.603 24.0388C106.527 25.7693 102.874 26.6367 99.7756 28.3053C92.528 32.2078 82.1777 33.8369 74.0887 33.8369C65.1509 33.8369 58.6452 33.2231 52.1091 26.687C49.5227 24.1006 46.5999 20.7534 46.0478 16.8888C45.3544 12.0349 46.0055 8.36163 49.6081 5.11933C52.3831 2.62181 56.4425 1 60.0535 1C63.8828 1 67.2505 1.0541 70.2636 3.76583C71.382 4.77242 72.4517 6.0421 73.1471 7.35554C73.9128 8.8018 74.3883 11.4375 75.2656 12.5341C77.1166 14.8478 76.2072 19.9816 76.2072 22.9796C76.2072 24.9299 76.4444 26.7714 75.5598 28.5407C75.0246 29.6112 73.1602 31.731 73.0294 32.7777C72.9016 33.7997 70.9225 35.3025 70.3813 36.2497C69.2388 38.2489 66.9509 38.7869 65.6146 40.4573C63.8849 42.6194 58.8386 43.8392 56.3461 45.2239C54.4064 46.3015 52.0667 46.6457 49.9906 47.1071C38.962 49.5579 28.6562 49.052 18.7131 43.3702C15.6882 41.6417 12.4539 39.4435 9.88598 37.1324C8.06254 35.4913 5.98297 33.9055 4.82509 31.7184C4.17562 30.4916 2.43638 28.5407 1 28.5407" stroke="#333333" stroke-linecap="round"/>
                 </svg>
                 <svg id='paperplane' width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1 11.1509C1.21534 11.1509 1.63676 11.1022 1.80296 10.9713C1.9241 10.876 2.26665 10.6793 2.41613 10.6373C2.99397 10.4748 3.63798 9.85783 4.252 9.85783C4.90293 9.85783 5.33718 9.10472 5.89078 8.94905C6.11214 8.88681 6.48891 8.6527 6.66454 8.51442C6.83423 8.38083 7.29572 8.10603 7.504 8.04747C7.76675 7.97359 7.96076 7.7343 8.22667 7.65953C8.4105 7.60784 8.61326 7.49549 8.78144 7.40091C9.12022 7.21039 9.45235 7.06168 9.8034 6.89803C10.5929 6.52996 11.3051 6.04145 12.1028 5.66958C13.024 5.24012 13.7963 4.60635 14.7818 4.28307C15.1682 4.15631 15.5214 3.94415 15.8804 3.74787C16.1787 3.58476 16.5831 3.51159 16.8476 3.27732C17.3694 2.81511 17.9755 2.588 18.5739 2.26079C18.8449 2.11265 19.1354 2.01865 19.3952 1.89081C19.5227 1.82807 19.6043 1.70126 19.7236 1.63219C19.8331 1.5688 20.1163 1.43835 20.1835 1.35561C20.2893 1.22545 20.8179 1 20.9719 1C21.1319 1 20.5603 1.5383 20.4828 1.5819C19.9716 1.86939 19.7511 2.64536 19.4937 3.10131C19.3549 3.34715 19.4282 3.65843 19.3149 3.9095C19.1911 4.1836 19.2022 4.55376 19.136 4.84701C18.9716 5.57505 18.9353 6.45155 18.5119 7.10637C18.2032 7.5838 18.0516 8.15933 17.7527 8.64374C17.4523 9.13074 17.201 9.79606 17.0301 10.3427C16.673 11.4849 16.0626 12.5556 15.6212 13.6725C15.2775 14.5424 14.8985 15.5987 14.8621 16.5317C14.8564 16.6769 14.8734 17.4653 14.7635 17.5518C14.5704 17.7039 14.8667 18.2574 14.7161 18.4427C14.5881 18.6001 14.704 19.2713 14.4022 18.7516C14.3026 18.58 13.9252 18.457 13.7452 18.457C13.4947 18.457 13.2082 18.3502 12.9897 18.2307C12.9017 18.1826 12.8128 18.0332 12.7233 18.008C12.5996 17.9733 12.4123 17.9378 12.3145 17.8608C11.8743 17.5142 11.3589 17.3318 10.9859 16.873C10.8326 16.6843 10.5449 16.6131 10.3801 16.4671C10.2727 16.3719 10.1204 16.348 10.0151 16.2444C9.91747 16.1483 9.82333 16.0326 9.70485 15.9678C9.60315 15.9122 9.49305 15.8061 9.37637 15.8061C9.18298 15.8061 9.18897 15.9295 9.06613 16.0504C8.91824 16.1959 8.87875 16.5212 8.7194 16.6467C8.32365 16.9582 8.22236 17.6672 7.73759 17.9398C7.5525 18.0439 7.44208 18.3894 7.27406 18.5217C7.13682 18.6297 6.99798 19.0597 6.97843 19.2329C6.96856 19.3203 6.89969 19.5562 6.78133 19.5562C6.71725 19.5562 6.64994 19.2067 6.64994 19.1359C6.64994 18.8932 6.75431 18.3106 6.59884 18.1194C6.5173 18.0191 6.62308 17.8421 6.53315 17.7314C6.48447 17.6716 6.47622 17.3482 6.4565 17.2609C6.39328 16.9809 6.38715 16.678 6.38715 16.388C6.38715 16.0807 6.32146 15.7978 6.32146 15.5152C6.32146 15.2591 6.13964 15.0272 6.12436 14.7717C6.10885 14.512 5.74055 14.3919 5.56594 14.2544C5.35338 14.0871 5.17922 13.7723 4.87612 13.7372C4.43723 13.6864 3.95087 13.1858 3.64248 12.8823C3.27771 12.5233 2.69117 12.3914 2.29934 12.0058C2.14386 11.8528 1.91326 11.7248 1.78836 11.5712C1.6277 11.3736 1.30421 11.3618 1.19709 11.1509" stroke="#333333" stroke-linecap="round"/>
@@ -104,13 +170,12 @@ function RSVP() {
                   <path d="M16.3066 5.59058C16.3066 5.82753 16.4154 6.323 16.6351 6.4311" stroke="#333333" stroke-linecap="round"/>
                   <path d="M17.3594 4.42676C17.4723 4.44065 17.753 5.13695 17.8193 5.26728" stroke="#333333" stroke-linecap="round"/>
                 </svg>
-               
             </button>
             
-
-            
           </div>
+          <hr className="bottom-left-hr-rsvp" />
         </div>
+        
 
 
 
@@ -124,9 +189,12 @@ function RSVP() {
           </div>
           <h3 className="margin-top-large text-align-left font-size-h4 raleway light-weight">
             Dietary Restrictions
+            <br/><sub className="font-size-small leave-message raleway text-align-left">Feel free to leave a note for us &hearts;</sub>
           </h3>
+          <textarea value={rsvp.dietary} onChange={(e) => setRsvp({ ...rsvp, dietary: e.target.value })} className="raleway glass-textarea"/>
         </div>
 
+      </div>
       </div>
     </>
   );

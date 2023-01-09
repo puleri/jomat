@@ -27,6 +27,25 @@ form {
   min-height: 100vh;
 }
 
+.overflow-hidden {
+  position: relative;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.leave-message {
+  position: absolute;
+}
+
+.mtns-rsvp {
+  position: absolute;
+  top:200px;
+  left: 150px;
+  width: 90vw;
+  z-index: -2;
+  filter:hue-rotate(250deg) grayscale(70%)
+}
+
 .form-control {
   font-family: system-ui, sans-serif;
   font-size: 2rem;
@@ -46,6 +65,7 @@ form {
 }
 
 input[type="radio"] {
+  cursor: pointer;
   /* Add if not using autoprefixer */
   -webkit-appearance: none;
   /* Remove most all native input styles */
@@ -69,6 +89,7 @@ input[type="radio"] {
 
 input[type="radio"]::before {
   content: "";
+  cursor: pointer;
   width: 0.95em;
   height: 0.95em;
   border-radius: 20%;
@@ -81,6 +102,7 @@ input[type="radio"]::before {
 
 input[type="radio"].no::before {
   content: "";
+  cursor: pointer;
   width: 0.95em;
   height: 0.95em;
   border-radius: 20%;
@@ -111,45 +133,8 @@ input[type="radio"]:focus {
   perspective: 300px;
 }
 
-#paperplane {
-  margin-left: -65px;
-  margin-top: 6px;
-  width:100px;
-}
-
 .justify-center {
   justify-content: center;
-}
-
-
-.mail-svg {
-  margin: 5vh 0 0;
-  height: 25px;
-  width: 100%;
-  animation-play-state: paused;
-
-}
-
-.path {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: dash 1.1s cubic-bezier(.67,.22,.86,.66) forwards;
-  animation-play-state: paused;
-  transition: all .3s ease-out;
-}
-
-.mail-svg:focus .path{
-  animation-play-state: running;
-
-}
-
-@keyframes dash {
-  from {
-    stroke-dashoffset: 998;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
 }
 
 .parallax-group {
@@ -372,6 +357,9 @@ input[type="radio"]:focus {
   line-height: 30px;
 }
 
+.font-size-small {
+  font-size: 1vw;
+}
 .no-guests-label {
   margin-top:-25px;
 }
@@ -382,29 +370,102 @@ input[type="radio"]:focus {
   margin-left: 52%;
   padding: 10px;
   padding-bottom: 5px;
-  background-color: #F3F2F1;
+  background-color: #f3f2f100;
   border: none;
   border-bottom: 1px solid #333333;
   transition: all .1s ease-out;
   margin-bottom: 25px;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.glass-textarea {
+  height: 200px;
+  border: 1px solid white;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  background-color: #ffffff6f;
+  box-shadow: 0px 0px 10px #a4a4a460;
+  vertical-align: top;
+  padding:15px;
+  font-size: 1.1vw;
+  z-index: 0;
+  resize: none;
+}
+
+textarea:focus {
+  outline: 2px solid #5f715c;
+}
+
+
 .submit-btn {
-  background-color: #F3F2F1;
+  background-color: #ffffff00;
   border: none;
   cursor: pointer;
-  transition: all .3s ease-in-out;
+  transition: all .1s ease-in-out;
 }
 
 .submit-btn:focus {
   outline: none;
-  margin-left: 22px;
-  transform: scale(1.1);
+  margin-left: 2px;
+  transform: skewX(-10deg);
+}
+
+.mail-svg {
+  position: absolute;
+  bottom: 00px;
+  padding:0;
+  height: 95px;
+  width: 30%;
+  animation-play-state: paused;
+}
+
+#swoop {
+  margin-left:5px;
+}
+
+#paperplane {
+  right:-60px;
+  top:10px;
+  position: absolute;
+  width:100px;
+}
+
+.path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 1.1s cubic-bezier(.67,.22,.86,.66) forwards;
+  animation-play-state: paused;
+  transition: all .3s ease-out;
+}
+
+.mail-svg:focus .path{
+  animation-play-state: running;
+
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 998;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 .no-guests-input:focus {
   outline: none;
-  border-bottom: 3px solid #333333;
+  border-bottom: 3px solid #5f715c;
   margin-bottom: 23px;
 }
 
@@ -418,7 +479,7 @@ input[type="radio"]:focus {
   margin-left: 30px;
   padding: 10px;
   padding-bottom: 5px;
-  background-color: #F3F2F1;
+  background-color: #f3f2f100;
   border: none;
   border-bottom: 1px solid #333333;
   transition: all .1s ease-out;
@@ -426,7 +487,7 @@ input[type="radio"]:focus {
 }
 .text-input:focus {
   outline: none;
-  border-bottom: 3px solid #333333;
+  border-bottom: 3px solid #5f715c;
   margin-bottom: 23px;
 }
 .width-50 {
@@ -435,7 +496,9 @@ input[type="radio"]:focus {
 .radio-input {
   margin: -12px 0 12px 90% !important;
 }
-
+.joyfully {
+  margin-top: 12px;
+}
 .raleway {
   font-family: 'Raleway', sans-serif;
 }
@@ -538,6 +601,18 @@ input[type="radio"]:focus {
 
 .debug-pink {
   background-color: pink;
+}
+
+.bottom-left-hr-rsvp {
+  position: absolute;
+  text-align: left;
+  width: 34%;
+  height: 1px;
+  background-color: #333333;
+  bottom: 0px;
+  border: none;
+  margin-right: 0;
+  color: #333333;
 }
 
 .top-right-hr-rsvp {

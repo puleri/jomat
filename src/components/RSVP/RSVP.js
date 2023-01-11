@@ -16,8 +16,6 @@ function RSVP() {
     dietary: ''
   })
 
-  const [formOpen, setFormOpen] = useState(false)
-
   const [notification, setNotification] = useState({
     active: false,
     error: false,
@@ -34,7 +32,7 @@ function RSVP() {
         setNotification({
             active: true,
             error: true,
-            message: 'Fill out name before submitting'
+            message: `✎ | fill form fields`
         })
 
         setTimeout(() => {
@@ -43,7 +41,7 @@ function RSVP() {
                 error: false,
                 message: ''
             })
-          }, "4000")
+          }, "8000")
           return
     }
     const db = firebase.firestore();
@@ -55,18 +53,11 @@ function RSVP() {
         numberGuests: rsvp.numberGuests
     })
     .then(() => {
-        setFormOpen(false)
         setNotification({
             active: true,
             error: false,
-            message: 'We are so very excited to have you. Thank you for your response and we look forward to sharing our beautiful moment with you'
+            message: 'We are so very excited to have you and look forward to sharing our beautiful moment with you ♥'
         })
-        setTimeout(() => {
-            setNotification({
-                active: false,
-                message: ''
-            })
-          }, "4000")
         console.log("Document successfully written!");
     })
     .catch((error) => {
@@ -80,18 +71,11 @@ function RSVP() {
         numberGuests: rsvp.numberGuests
     })
     .then(() => {
-        setFormOpen(false)
         setNotification({
             active: true,
             error: false,
-            message: 'We will miss you so much, and will carry you in spirit on our special day'
+            message: `We will miss you so much, and will carry you in spirit on our special day ♥`
         })
-        setTimeout(() => {
-            setNotification({
-                active: false,
-                message: ''
-            })
-          }, "4000")
         console.log("Document successfully written!");
     })
     .catch((error) => {
@@ -100,12 +84,28 @@ function RSVP() {
     }
 }
 
+const errorDiv = () => {
+  return (
+    <div className="error-popup raleway">{notification.message}</div>
+  )
+}
+
+const notificationDiv = () => {
+  return (
+    <div className="success-popup raleway">Thank you so much for your response!<br/><br/>{notification.message}{ (rsvp.response == 'accepts') ? <><br/><br/>Check back soon to see the updated itenerary and gallery pages for a glimpse into the wedding weekend <br/><br/><h1>🌲</h1></> : ""}</div>
+  )
+}
+
 
   return (
     <>
      <div className="overflow-hidden">
       <Navbar />
         <img className="mtns-rsvp" src={mtns} />
+        { notification.active 
+            ? <>{ notification.error ? errorDiv() : notificationDiv() }</>
+            : <></>
+        }
       <div className="flex just-center nav-pull-margin">
 
         <div className="relative padding-medium col text-center flex">
